@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Bookworm</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_archive">Archive</string>
+    <string name="menu_stats">Stats</string>
+    <string name="menu_settings">Settings</string>
+
+</resources>
