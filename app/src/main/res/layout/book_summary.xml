@@ -8,7 +8,7 @@
         android:id="@+id/thumbnailHolder"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:layout_constraintLeft_toLeftOf="">
+        app:layout_constraintLeft_toLeftOf="parent">
 
     </android.support.constraint.ConstraintLayout>
 

@@ -2,13 +2,18 @@ package kim.gaeun.bookworm.activity.home;
 
 import java.util.*;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import kim.gaeun.bookworm.R;
+import kim.gaeun.bookworm.ReadActivity;
 import kim.gaeun.bookworm.model.BookSummary;
 
 class HomeActivity extends AppCompatActivity {
@@ -23,7 +28,20 @@ class HomeActivity extends AppCompatActivity {
         prepareBookSummaries();
 
         recyclerView = (RecyclerView) findViewById(R.id.dashBoard);
-        mAdapter = new BookSummaryAdapter(mBookSummaries);
+        mAdapter = new BookSummaryAdapter(mBookSummaries, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int itemPosition = recyclerView.getChildLayoutPosition(view);
+                BookSummary summary = mBookSummaries.get(itemPosition);
+                Log.i("BookSummaryAdapter", summary.getTitle());
+                //Toast.makeText(HomeActivity.this, summary.getTitle(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(HomeActivity.this, ReadActivity.class);
+                intent.putExtra("title", summary.getTitle());
+                intent.putExtra("author", summary.getAuthor());
+                intent.putExtra("rating", summary.getRating());
+                startActivity(intent);
+            }
+        });
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

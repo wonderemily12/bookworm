@@ -1,6 +1,7 @@
 package kim.gaeun.bookworm.activity.home;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,15 +30,18 @@ public class BookSummaryAdapter extends RecyclerView.Adapter<BookSummaryAdapter.
 
     List<BookSummary> mBookSummaries;
 
-    public BookSummaryAdapter(List<BookSummary> summaries) {
+    private View.OnClickListener mOnClickListener;
+
+    public BookSummaryAdapter(List<BookSummary> summaries, View.OnClickListener listener) {
         mBookSummaries = summaries;
+        mOnClickListener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.book_summary, parent, false);
-
+        itemView.setOnClickListener(mOnClickListener);
         return new ViewHolder(itemView);
     }
 
